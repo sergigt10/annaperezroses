@@ -45,7 +45,8 @@ class PortadesController extends Controller
             'actiu' => 'required',
             'ordre' => 'nullable',
             'imatge1' => 'required|image|max:10240|mimes:jpeg,png,jpg,gif,svg',
-            'imatge2' => 'required|image|max:10240|mimes:jpeg,png,jpg,gif,svg'
+            'imatge2' => 'required|image|max:10240|mimes:jpeg,png,jpg,gif,svg',
+            'imatge3' => 'required|image|max:10240|mimes:jpeg,png,jpg,gif,svg'
         ]);/* Max foto 10 MB */
 
         $ruta_imatge1 = $request['imatge1']->store('backend/portades', 'public');
@@ -56,9 +57,14 @@ class PortadesController extends Controller
         $imatge2 = Image::make( storage_path("app/public/{$ruta_imatge2}") )->fit(1200, 752, function($constraint){$constraint->aspectRatio();});
         $imatge2->save();
 
+        $ruta_imatge3 = $request['imatge3']->store('backend/portades', 'public');
+        $imatge3 = Image::make( storage_path("app/public/{$ruta_imatge3}") )->resize(1879, 1920, function($constraint){$constraint->aspectRatio();});
+        $imatge3->save();
+
         $portada = new Portada($data);
         $portada->imatge1 = $ruta_imatge1;
         $portada->imatge2 = $ruta_imatge2;
+        $portada->imatge3 = $ruta_imatge3;
         
         if($request->filled('ordre')){
             $portada->ordre = $data['ordre'];
@@ -135,6 +141,20 @@ class PortadesController extends Controller
             }  
         }
 
+        if($request['imatge3']) {
+            $ruta_imatge3 = $request['imatge3']->store('backend/portades', 'public');
+
+            $img = Image::make( storage_path("app/public/{$ruta_imatge3}") )->resize(1879, 1920, function($constraint){$constraint->aspectRatio();});
+            $img->save();
+
+            // Eliminamos la imagen anterior
+            if (File::exists(storage_path("app/public/$portada->imatge3"))) {
+                File::delete(storage_path("app/public/$portada->imatge3"));
+                // Asignar al objeto
+                $portada->imatge3 = $ruta_imatge3;
+            }  
+        }
+
         $portada->save();
 
         // Redireccionar
@@ -152,6 +172,12 @@ class PortadesController extends Controller
         // Eliminar imatges
         if (File::exists(storage_path("app/public/$portada->imatge1"))) {
             File::delete(storage_path("app/public/$portada->imatge1"));
+        }
+        if (File::exists(storage_path("app/public/$portada->imatge2"))) {
+            File::delete(storage_path("app/public/$portada->imatge2"));
+        }
+        if (File::exists(storage_path("app/public/$portada->imatge3"))) {
+            File::delete(storage_path("app/public/$portada->imatge3"));
         }
 
         $portada->delete();

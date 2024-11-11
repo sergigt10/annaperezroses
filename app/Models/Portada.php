@@ -12,6 +12,7 @@ class Portada extends Model
     protected $fillable = [
         'imatge1',
         'imatge2',
+        'imatge3',
         'actiu',
         'ordre'
     ];

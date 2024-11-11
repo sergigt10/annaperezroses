@@ -27,13 +27,12 @@
                     <ul class="hover-option4 lightbox-gallery portfolio-wrapper grid grid-loading grid-3col xl-grid-3col lg-grid-3col md-grid-2col sm-grid-2col xs-grid-1col gutter-medium">
                         <li class="grid-sizer"></li>
                         @foreach($portades as $portada)
-                            @php $imatgeTraduccio = translatePHP($portada, 'imatge') @endphp
                             
                             <li class="grid-item wow animate__fadeInUp">
-                                <a href="{{ asset("/storage/$imatgeTraduccio") }}" title="" data-group="lightbox-gallery">
+                                <a href="{{ asset("/storage/$portada->imatge3") }}" title="" data-group="lightbox-gallery">
                                     <figure>
                                         <div class="portfolio-img bg-extra-dark-gray">
-                                            <img src="{{ asset("/storage/$imatgeTraduccio") }}" alt="Anna Perez Roses" class="project-img-gallery"/>
+                                            <img src="{{ asset("/storage/$portada->imatge3") }}" alt="Anna Perez Roses" class="project-img-gallery"/>
                                         </div>
                                         <figcaption>
                                             <div class="portfolio-hover-main d-flex justify-content-center align-items-center">

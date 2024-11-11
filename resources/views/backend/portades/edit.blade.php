@@ -83,7 +83,38 @@
                                                 <div class="form-group col-md-3">
                                                     @if( $portada->imatge2 )
                                                         <div class="form-check form-check-danger" style="float:right;">
-                                                            <img src='{{ asset("/storage/$portada->imatge2") }}' alt="Tècnics" with=200 height=92>
+                                                            <img src='{{ asset("/storage/$portada->imatge2") }}' alt="Anna Perez Roses" with=200 height=92>
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row grid-margin">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 style="color:red">Pujar imatges en format: jpg, png o gif</h4>
+                                            <br>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-9">
+                                                    <div class="form-group">
+                                                        <label>Imatge mòbil *</label>
+                                                        <input name="imatge3" type="file" class="file-upload-default">
+                                                        <div class="input-group col-xs-12">
+                                                            <input name="imatge3" type="text" class="form-control @error('imatge3') is-invalid @enderror file-upload-info" readonly="readonly" placeholder="Imatge mòbil" value="{{ old('imatge3') }}">
+                                                            <span class="input-group-append">
+                                                                <button class="file-upload-browse btn btn-primary" type="button">Cercar imatge mòbil</button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    @if( $portada->imatge3 )
+                                                        <div class="form-check form-check-danger" style="float:right;">
+                                                            <img src='{{ asset("/storage/$portada->imatge3") }}' alt="Anna Perez Roses" with=200 height=92>
                                                         </div>
                                                     @endif
                                                 </div>
